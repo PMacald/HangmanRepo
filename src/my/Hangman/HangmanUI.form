@@ -16,6 +16,12 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="99" green="ff" red="99" type="rgb"/>
+    </Property>
+    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -41,29 +47,26 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="Guess_Progress_Bar" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="Submit_Letter_Button" alignment="0" min="-2" pref="425" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="186" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="jScrollPane5" min="-2" pref="236" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Make_A_Guess_Button" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="LetterInputField" min="-2" pref="32" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jScrollPane4" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane5" min="-2" pref="236" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jScrollPane3" min="-2" pref="666" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="LetterInputField" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane4" max="32767" attributes="0"/>
+                          <Component id="Restart_Button" min="-2" pref="250" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Submit_Letter_Button" min="-2" pref="425" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="Make_A_Guess_Button" min="-2" pref="250" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -78,19 +81,22 @@
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane3" min="-2" pref="219" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane5" max="32767" attributes="0"/>
+                  <Component id="jScrollPane5" min="-2" pref="330" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <EmptySpace pref="9" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="LetterInputField" alignment="3" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Component id="LetterInputField" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Submit_Letter_Button" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                  <Component id="Make_A_Guess_Button" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="Restart_Button" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Submit_Letter_Button" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="Make_A_Guess_Button" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Guess_Progress_Bar" min="-2" pref="41" max="-2" attributes="0"/>
@@ -117,9 +123,12 @@
     <Component class="javax.swing.JTextField" name="LetterInputField">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="0"/>
+          <Font name="Tempus Sans ITC" size="18" style="1"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LetterInputFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Submit_Letter_Button">
       <Properties>
@@ -146,7 +155,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="0"/>
+          <Font name="Tempus Sans ITC" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Please Enter Your Letter:"/>
@@ -162,15 +171,28 @@
         <Component class="javax.swing.JTextArea" name="Title_Text_Area">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="cc" type="rgb"/>
+            </Property>
             <Property name="columns" type="int" value="20"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="MS Gothic" size="48" style="0"/>
+              <Font name="Pristina" size="48" style="1"/>
             </Property>
-            <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="1"/>
             <Property name="tabSize" type="int" value="1"/>
             <Property name="text" type="java.lang.String" value="HANGMAN"/>
             <Property name="alignmentX" type="float" value="0.0"/>
+            <Property name="autoscrolls" type="boolean" value="false"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                <MatteColorBorder bottom="3" left="3" right="3" top="3">
+                  <Color PropertyName="color" blue="99" green="cc" red="0" type="rgb"/>
+                </MatteColorBorder>
+              </Border>
+            </Property>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
             <Property name="dragEnabled" type="boolean" value="true"/>
           </Properties>
         </Component>
@@ -186,17 +208,22 @@
         <Component class="javax.swing.JTextArea" name="Word_Guess_Text">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="cc" type="rgb"/>
+            </Property>
             <Property name="columns" type="int" value="20"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="MS Gothic" size="36" style="1"/>
+              <Font name="Pristina" size="36" style="1"/>
             </Property>
-            <Property name="rows" type="int" value="5"/>
+            <Property name="rows" type="int" value="1"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                <MatteColorBorder bottom="3" left="3" right="3" top="3">
+                  <Color PropertyName="color" blue="99" green="cc" red="0" type="rgb"/>
+                </MatteColorBorder>
+              </Border>
+            </Property>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="null"/>
-            </Property>
-          </AccessibilityProperties>
         </Component>
       </SubComponents>
     </Container>
@@ -209,14 +236,36 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="Hangman_Drawing_Text">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="cc" type="rgb"/>
+            </Property>
             <Property name="columns" type="int" value="20"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="18" style="1"/>
             </Property>
             <Property name="rows" type="int" value="5"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                <MatteColorBorder bottom="3" left="3" right="3" top="3">
+                  <Color PropertyName="color" blue="99" green="cc" red="0" type="rgb"/>
+                </MatteColorBorder>
+              </Border>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="Restart_Button">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tempus Sans ITC" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Restart"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Restart_ButtonMouseClicked"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

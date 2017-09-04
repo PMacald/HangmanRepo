@@ -4,10 +4,21 @@
  * and open the template in the editor.
  */
 package my.Hangman;
+import java.awt.Color;
 import java.util.*;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import jdk.nashorn.internal.ir.ContinueNode;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import java.io.Console;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
 
 /**
  *
@@ -21,7 +32,7 @@ public class HangmanUI extends javax.swing.JFrame {
     
     private String[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
     private List<String> usedLetters = new ArrayList<String>();
-    private String[] secretWordArrayList = {"doctor","animal","pirate","wizard","cloud","clown","fright","music","sunshine","triplet","pillow","raptor","sickly","radical"};
+    private String[] secretWordArrayList = {"doctor","animal","pirate","wizard","cloud","clown","fright","music","sunshine","triplet","pillow","raptor","sickly","radical","edgy","words","curry","sandwich"};
     private List<String> secretWordLetters = new ArrayList<String>();
     private int guessesLeft = 5;
     private int totalGuesses = 5;
@@ -84,6 +95,23 @@ public class HangmanUI extends javax.swing.JFrame {
     
     public HangmanUI() {
         initComponents();
+        String filePath = new File("").getAbsolutePath();
+        filePath += "\\Resources\\HangmanIcon.ico";
+        System.out.println(filePath);
+       
+        /*try {
+            this.setIconImage(ImageIO.read(new File("‪C:\\Users\\Peter\\OneDrive\\Documents\\NetBeansProjects\\Hangman\\HangmanRepo\\Resources\\HangmanIcon.ico")));
+        }
+        catch (IOException exc) {
+            exc.printStackTrace();
+        }*/
+      
+        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(filePath));
+        
+        this.setTitle("Hangman");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(new Color(153,255,153));
         
         Hangman_Drawing_Text.setText(hangmanDrawings[0]);
         chosenWord = secretWordArrayList[(int)Math.round(Math.random()*secretWordArrayList.length)];
@@ -125,10 +153,13 @@ public class HangmanUI extends javax.swing.JFrame {
         Word_Guess_Text = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         Hangman_Drawing_Text = new javax.swing.JTextArea();
+        Restart_Button = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 255, 153));
+        setForeground(java.awt.Color.red);
 
         Make_A_Guess_Button.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         Make_A_Guess_Button.setText("Make A Guess");
@@ -139,7 +170,12 @@ public class HangmanUI extends javax.swing.JFrame {
             }
         });
 
-        LetterInputField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LetterInputField.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        LetterInputField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LetterInputFieldKeyPressed(evt);
+            }
+        });
 
         Submit_Letter_Button.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         Submit_Letter_Button.setText("Submit Letter");
@@ -154,32 +190,47 @@ public class HangmanUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Please Enter Your Letter:");
 
         Title_Text_Area.setEditable(false);
+        Title_Text_Area.setBackground(new java.awt.Color(204, 255, 204));
         Title_Text_Area.setColumns(20);
-        Title_Text_Area.setFont(new java.awt.Font("MS Gothic", 0, 48)); // NOI18N
-        Title_Text_Area.setLineWrap(true);
+        Title_Text_Area.setFont(new java.awt.Font("Pristina", 1, 48)); // NOI18N
         Title_Text_Area.setRows(1);
         Title_Text_Area.setTabSize(1);
         Title_Text_Area.setText("HANGMAN");
         Title_Text_Area.setAlignmentX(0.0F);
+        Title_Text_Area.setAutoscrolls(false);
+        Title_Text_Area.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 204, 153)));
+        Title_Text_Area.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         Title_Text_Area.setDragEnabled(true);
         jScrollPane3.setViewportView(Title_Text_Area);
 
         Word_Guess_Text.setEditable(false);
+        Word_Guess_Text.setBackground(new java.awt.Color(204, 255, 204));
         Word_Guess_Text.setColumns(20);
-        Word_Guess_Text.setFont(new java.awt.Font("MS Gothic", 1, 36)); // NOI18N
-        Word_Guess_Text.setRows(5);
+        Word_Guess_Text.setFont(new java.awt.Font("Pristina", 1, 36)); // NOI18N
+        Word_Guess_Text.setRows(1);
+        Word_Guess_Text.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 204, 153)));
         jScrollPane4.setViewportView(Word_Guess_Text);
-        Word_Guess_Text.getAccessibleContext().setAccessibleParent(null);
 
+        Hangman_Drawing_Text.setEditable(false);
+        Hangman_Drawing_Text.setBackground(new java.awt.Color(204, 255, 204));
         Hangman_Drawing_Text.setColumns(20);
         Hangman_Drawing_Text.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         Hangman_Drawing_Text.setRows(5);
+        Hangman_Drawing_Text.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 204, 153)));
         jScrollPane5.setViewportView(Hangman_Drawing_Text);
+
+        Restart_Button.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        Restart_Button.setText("Restart");
+        Restart_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Restart_ButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,23 +241,22 @@ public class HangmanUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Guess_Progress_Bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Submit_Letter_Button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Make_A_Guess_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LetterInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane4))))
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LetterInputField))
+                            .addComponent(Restart_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Submit_Letter_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Make_A_Guess_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -217,16 +267,18 @@ public class HangmanUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LetterInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LetterInputField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Submit_Letter_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Make_A_Guess_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Restart_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Submit_Letter_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Make_A_Guess_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Guess_Progress_Bar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -293,17 +345,31 @@ public class HangmanUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Make_A_Guess_ButtonMouseClicked
 
+    private void LetterInputFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LetterInputFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LetterInputFieldKeyPressed
+
+    private void Restart_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Restart_ButtonMouseClicked
+        // TODO add your handling code here:
+        int restartConfirmed = JOptionPane.showConfirmDialog(null,"Are you sure you'd like to restart?", "Restart",JOptionPane.WARNING_MESSAGE);
+        if (restartConfirmed == JOptionPane.YES_OPTION) {
+            main(new String[] {""});
+            dispose();}
+    }//GEN-LAST:event_Restart_ButtonMouseClicked
+
     
     private void GameWon() {
         JOptionPane.showMessageDialog(null,String.format("Congratulations, you got it! The word was indeed '%s'!",chosenWord),"You Are Winner!", JOptionPane.PLAIN_MESSAGE);
+        Word_Guess_Text.setText(String.format("The secret word was '%s'",chosenWord));
         Make_A_Guess_Button.setEnabled(false);
         Submit_Letter_Button.setEnabled(false);
+        
     }
     
     private void IncorrectGuess() {
         guessesLeft--;
            if(guessesLeft==0){
-               JOptionPane.showMessageDialog(null,"Sorry, You're out of guesses, better luck next time!","Out of Guesses", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null,String.format("Sorry, You're out of guesses, better luck next time! The word was %s.",chosenWord),"Out of Guesses", JOptionPane.INFORMATION_MESSAGE);
                Make_A_Guess_Button.setEnabled(false);
                Submit_Letter_Button.setEnabled(false);
                Word_Guess_Text.setText(String.format("The secret word was '%s'",chosenWord));
@@ -352,6 +418,7 @@ public class HangmanUI extends javax.swing.JFrame {
     private javax.swing.JTextArea Hangman_Drawing_Text;
     private javax.swing.JTextField LetterInputField;
     private javax.swing.JButton Make_A_Guess_Button;
+    private javax.swing.JButton Restart_Button;
     private javax.swing.JButton Submit_Letter_Button;
     private javax.swing.JTextArea Title_Text_Area;
     private javax.swing.JTextArea Word_Guess_Text;
